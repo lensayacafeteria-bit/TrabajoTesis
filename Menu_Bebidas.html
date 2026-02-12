@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú de Bebidas</title>
+  <link rel="stylesheet" href="Menu_Postres.css">
+  <link rel="icon" type="image/png" href="logo_cafeteria.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <header id="header">
+    <nav class="navbar">
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
+      <div class="menu">
+        <a href="Menu_Principal.html">Volver</a>
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">Whatsapp</a>
+        <a href="#">Correo</a>
+        <a href="#">Ubicación</a>
+        <a href="#">Contáctanos</a>
+
+        <a href="carrito.html" class="carrito-link">
+          <i class="fa fa-shopping-cart"></i>
+          <span id="cartCount" class="cart-count">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="bienvenida" id="inicio">
+      <h1>Bienvenido al<br><span>Menú de Bebidas</span></h1>
+    </div>
+  </header>
+
+  <section id="cafes">
+    <h2>Apartado de Cafés</h2>
+
+    <div class="menu-items">
+
+      <div class="item">
+        <img src="cafeamericano.png" alt="Café Americano">
+        <div class="info">
+          <h3>Café Americano</h3>
+          <p>Delicioso café americano preparado con granos seleccionados.</p>
+          <p class="precio">$50.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Café Americano" data-precio="50">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="Cafeirlandez.png" alt="Café Irlandés">
+        <div class="info">
+          <h3>Café Irlandés</h3>
+          <p>Delicioso café irlandés con un toque de whisky.</p>
+          <p class="precio">$70.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Café Irlandés" data-precio="70">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="Cafemoka.png" alt="Café Moka">
+        <div class="info">
+          <h3>Café Moka</h3>
+          <p>Delicioso café moka con chocolate y crema.</p>
+          <p class="precio">$80.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Café Moka" data-precio="80">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <h2>Apartado de Lattes</h2>
+    <div class="menu-items">
+      <div class="item">
+        <img src="LatteLavanda.png" alt="Latte de Lavanda">
+        <div class="info">
+          <h3>Latte de Lavanda</h3>
+          <p>Delicioso latte con un toque de lavanda.</p>
+          <p class="precio">$90.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Latte de Lavanda" data-precio="90">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="LatteMatcha.png" alt="Latte de Matcha">
+        <div class="info">
+          <h3>Latte de Matcha</h3>
+          <p>Delicioso latte con un toque de matcha.</p>
+          <p class="precio">$90.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Latte de Matcha" data-precio="90">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="LatteVainilla.png" alt="Latte de Vainilla">
+        <div class="info">
+          <h3>Latte de Vainilla</h3>
+          <p>Delicioso latte con un toque de vainilla.</p>
+          <p class="precio">$90.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Latte de Vainilla" data-precio="90">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <h2>Apartado de Malteadas</h2>
+    <div class="menu-items">
+      <div class="item">
+        <img src="malteadachocolate.png" alt="Malteada de Chocolate">
+        <div class="info">
+          <h3>Malteada de Chocolate</h3>
+          <p>Deliciosa malteada de chocolate con crema batida.</p>
+          <p class="precio">$100.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Malteada de Chocolate" data-precio="100">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="malteadafresa.png" alt="Malteada de Fresa">
+        <div class="info">
+          <h3>Malteada de Fresa</h3>
+          <p>Deliciosa malteada de fresa con crema batida.</p>
+          <p class="precio">$100.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Malteada de Fresa" data-precio="100">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="malteadaore.png" alt="Malteada de Vainilla">
+        <div class="info">
+          <h3>Malteada de Vainilla</h3>
+          <p>Deliciosa malteada de vainilla con crema batida.</p>
+          <p class="precio">$100.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Malteada de Vainilla" data-precio="100">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notificación de producto agregado -->
+  <div id="notificacion" class="notificacion">
+    <i class="fas fa-check-circle"></i>
+    <span id="notificacion-texto"></span>
+  </div>
+
+  <script>
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    function actualizarContador() {
+      const contador = document.getElementById('cartCount');
+      if (contador) {
+        const total = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+        contador.textContent = total;
+      }
+    }
+
+    function guardarCarrito() {
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      actualizarContador();
+    }
+
+    function mostrarNotificacion(mensaje) {
+      const notificacion = document.getElementById('notificacion');
+      const notificacionTexto = document.getElementById('notificacion-texto');
+      
+      if (notificacion && notificacionTexto) {
+        notificacionTexto.textContent = mensaje;
+        notificacion.classList.add('mostrar');
+        
+        setTimeout(() => {
+          notificacion.classList.remove('mostrar');
+        }, 3000);
+      }
+    }
+
+    document.querySelectorAll('.btn-agregar').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const nombre = btn.getAttribute('data-nombre');
+        const precio = parseFloat(btn.getAttribute('data-precio'));
+        const existente = carrito.find(p => p.nombre === nombre);
+        
+        if (existente) {
+          existente.cantidad++;
+        } else {
+          carrito.push({ nombre, precio, cantidad: 1 });
+        }
+        
+        guardarCarrito();
+        
+        // Efecto visual en el botón
+        const originalBg = btn.style.background;
+        btn.style.background = 'linear-gradient(180deg, #4CAF50 0%, #2E7D32 100%)';
+        setTimeout(() => {
+          btn.style.background = originalBg;
+        }, 300);
+        
+        // Mostrar notificación elegante
+        mostrarNotificacion(`✅ ${nombre} agregado al carrito`);
+      });
+    });
+
+    actualizarContador();
+  </script>
+</body>
+</html>

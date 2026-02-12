@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedidos</title>
+  <link rel="icon" type="image/png" href="logo_cafeteria.jpeg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="Pedidos.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>PEDIDOS</h2>
+
+   
+    <form action="pedidos.php" method="POST">
+
+      <div class="input-group">
+        <i class="fa fa-user"></i>
+        <input type="text" name="nombre" placeholder="Nombre" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fa fa-id-card"></i>
+        <input type="text" name="apellidos" placeholder="apellidos" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fa fa-road"></i>
+        <input type="text" name="calle" placeholder="Calle" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fa fa-map-marker-alt"></i>
+        <input type="text" name="colonia" placeholder="Colonia" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fa fa-home"></i>
+        <input type="text" name="num_ext_int" placeholder="Num. Ext. y Int." required>
+      </div>
+
+      <div class="input-group">
+        <i class="fa fa-envelope"></i>
+        <input type="text" name="codigo_postal" placeholder="Código Postal" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fa fa-location-dot"></i>
+        <input type="text" name="referencias" placeholder="Referencias">
+      </div>
+      <button type="submit" class="btn btn-primary">Confirmar Pedido</button>
+      <button type="button" class="btn btn-secondary" onclick="window.location.href='Menu_Principal.html'">Cancelar Pedido</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+body {
+    background: url(fondo.png);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+}
+
+.reserva-container {
+    width: 370px;
+    margin: 20px auto;
+    padding: 18px 18px 28px 18px;
+    border-radius: 32px;
+    box-shadow: 0 0 16px #3336;
+    background: url(fondo2.png);
+    border: 4px solid #fff;
+    background-size: cover;
+    background-position: center;
+}
+
+.reserva-titulo {
+    font-family: 'Caveat', cursive;
+    font-size: 2.6em;
+    color: #fff;
+    text-shadow: 2px 2px 0 #7c6f4b;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 18px;
+    letter-spacing: 2px;
+}
+
+.reserva-form label {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.15em;
+    margin-bottom: 8px;
+    color: #2e1c0b;
+}
+
+.reserva-form .input-group {
+    background: linear-gradient(90deg, #e0e0e0 0%, #f5efc9 100%);
+    border-radius: 12px;
+    padding: 7px 12px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 6px #0002;
+}
+
+.reserva-form .input-group i {
+    margin-left: auto;
+    font-size: 1.3em;
+    color: #6b4f1d;
+}
+
+.reserva-form input,
+.reserva-form select {
+    border: none;
+    background: transparent;
+    font-size: 1em;
+    margin-left: 8px;
+    flex: 1;
+    outline: none;
+    color: #3c2a13;
+}
+
+.reserva-form input::placeholder {
+    color: #a89c7a;
+}
+
+.reserva-btn {
+    display: block;
+    width: 80%;
+    margin: 22px auto 0 auto;
+    padding: 12px 0;
+    font-family: 'Caveat', cursive;
+    font-size: 1.6em;
+    color: #0c0c0c;
+    background: linear-gradient(180deg, #fdfdfd 0%, #fcdcbf 100%);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #0003;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-shadow: 1px 1px 0 #7c6f4b;
+}
+
+.reserva-btn:hover {
+    background: linear-gradient(180deg, #ffe066 0%, #4b3a1a 100%);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
+@media (max-width: 600px) {
+    .reserva-container {
+        width: 98%;
+        padding: 12px 8px 18px 8px;
+        border-radius: 18px;
+    }
+    .reserva-titulo {
+        font-size: 2em;
+        margin-bottom: 12px;
+    }
+    .reserva-btn {
+        font-size: 1.2em;
+        padding: 10px 0;
+        width: 100%;
+    }
+    .reserva-form label {
+        font-size: 1em;
+    }
+    .reserva-form .input-group {
+        padding: 5px 8px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    .reserva-container {
+        width: 70%;
+        padding: 16px 12px 24px 12px;
+        border-radius: 24px;
+    }
+    .reserva-titulo {
+        font-size: 2.2em;
+    }
+    .reserva-btn {
+        font-size: 1.4em;
+        width: 90%;
+    }
+}
+
+@media (min-width: 901px) {
+    .reserva-container {
+        width: 370px;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}

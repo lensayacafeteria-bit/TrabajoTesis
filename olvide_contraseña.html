@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar Contraseña</title>
+  <link rel="icon" type="image/png" href="logo_cafeteria.jpeg" />
+  <link rel="stylesheet" href="olvide_contraseña.css">
+</head>
+<body>
+  <div class="card">
+    <h2>Recuperar<br>Contraseña</h2>
+    <p class="sub">Ingresa tu Correo Registrado</p>
+
+    <label class="lbl" for="correo">Correo:</label>
+    <div class="input-box">
+      <input type="email" id="correo" placeholder="   ">
+      <span class="icon-mail"></span>
+    </div>
+
+    <button class="btn" id="btnRecuperar">Recuperar Contraseña</button>
+    <p id="respuesta" class="msg"></p>
+  </div>
+
+  <script>
+  document.getElementById('btnRecuperar').addEventListener('click', function() {
+      let correo = document.getElementById('correo').value.trim();
+
+      if (correo === "") {
+          document.getElementById('respuesta').textContent = "Ingresa un correo.";
+          return;
+      }
+
+      let datos = new FormData();
+      datos.append('correo', correo);
+
+      fetch('validar_correo.php', {
+          method: 'POST',
+          body: datos
+      })
+      .then(res => res.json())
+      .then(data => {
+          document.getElementById('respuesta').textContent = data.mensaje;
+
+          // Si el servidor devuelve una URL válida, redirige automáticamente
+          if (data.token_url) {
+              setTimeout(() => {
+                  window.location.href = data.token_url;
+              }, 1500); // Espera 1.5 segundos para mostrar el mensaje
+          }
+      })
+      .catch(err => {
+          document.getElementById('respuesta').textContent = "Error al conectar con el servidor.";
+      });
+  });
+  </script>
+</body>
+</html>

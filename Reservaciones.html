@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservación</title>
+  <link rel="icon" type="image/png" href="logo_cafeteria.jpeg" />
+  <link rel="stylesheet" href="Reservaciones.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="reserva-container">
+    <h1 class="reserva-titulo">Haz tu Reservación</h1>
+    <form action="Reservaciones.php" method="POST" class="reserva-form">
+      
+      <label>Nombre:</label>
+      <div class="input-group">
+        <input type="text" name="nombre" placeholder="Escribe tu nombre" required>
+        <i class="fa-solid fa-user"></i>
+      </div>
+
+      <label>Teléfono:</label>
+      <div class="input-group">
+        <input type="text" name="telefono" placeholder="Ej: 555-123-4567" required>
+        <i class="fa-solid fa-phone"></i>
+      </div>
+
+      <label>Correo:</label>
+      <div class="input-group">
+        <input type="email" name="correo" placeholder="tu@correo.com" required>
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+
+      <label>Fecha:</label>
+      <div class="input-group">
+        <input type="date" name="fecha" required>
+        <i class="fa-solid fa-calendar-days"></i>
+      </div>
+
+      <label>Hora:</label>
+      <div class="input-group">
+        <input type="time" name="hora" required>
+        <i class="fa-solid fa-clock"></i>
+      </div>
+
+      <label>Número de personas:</label>
+      <div class="input-group">
+        <input type="number" name="personas" min="1" max="20" placeholder="Ej: 4" required>
+        <i class="fa-solid fa-users"></i>
+      </div>
+
+      <label>Mensaje adicional:</label>
+      <div class="input-group">
+        <input type="text" name="mensaje" placeholder="Opcional">
+        <i class="fa-solid fa-comment"></i>
+      </div>
+    <button type="button" class="reserva-btn" onclick="window.location.href='Menu_Principal.html'">
+      <i class="fa-solid fa-arrow-left"></i> Regresar al Menú Principal
+    </button>
+
+      <button type="submit" class="reserva-btn">Reservar</button>
+    </form>
+  </div>
+</body>
+</html>

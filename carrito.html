@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito de Compras</title>
+  <link rel="stylesheet" href="carrito.css" />
+  <link rel="icon" type="image/png" href="logo_cafeteria.jpeg" />
+
+</head>
+<body>
+
+  <header>
+    <div class="navbar">
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
+      <input type="checkbox" id="menu-toggle">
+      <div class="menu">
+        <a href="Menu_Principal.html">Menú Principal</a>
+        <a href="Menu_Postres.html">Postres</a>
+        <a href="Menu_Bebidas.html">Bebidas</a>
+        <a href="Menu_Snacks.html">Snacks</a>
+        <a href="Menu_Comida.html">Comida</a>
+        <a href="index.html">Cerrar Sesión</a>
+      </div>
+    </div>
+
+    <div class="bienvenida">
+      <h1>Tu Carrito <span>de Compras</span></h1>
+      <p>Disfruta de los productos seleccionados en nuestra cafetería</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="carrito-contenedor">
+      <h2>Productos Agregados</h2>
+      <table class="tabla-carrito" id="tablaCarrito">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody id="carrito-body"></tbody>
+      </table>
+
+      <div class="total-carrito" id="totalCarrito">Total: $0.00</div>
+
+      <div class="botones">
+        <button class="btn-vaciar" id="vaciarCarrito">Vaciar Carrito</button>
+        <button class="btn-pago" id="comprar">Realizar Pedido</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">
+      <img src="logo_cafeteria.jpeg" alt="Logo Cafetería" />
+    </div>
+    <p class="copy">© 2025 Cafetería El Buen Sabor. Todos los derechos reservados.</p>
+  </footer>
+
+  <div id="cafeteria-msg" class="cafeteria-msg" aria-live="polite"></div>
+
+  <script>
+  const carritoKey = 'carrito';
+  let carrito = JSON.parse(localStorage.getItem(carritoKey)) || [];
+
+  const carritoBody = document.getElementById('carrito-body');
+  const totalCarrito = document.getElementById('totalCarrito');
+  const vaciarBtn = document.getElementById('vaciarCarrito');
+  const comprarBtn = document.getElementById('comprar');
+  const msgDiv = document.getElementById('cafeteria-msg');
+
+  function guardarCarrito() {
+    localStorage.setItem(carritoKey, JSON.stringify(carrito));
+    actualizarBadgeGlobal();
+  }
+
+  function mostrarMensaje(texto, ms = 2000) {
+    msgDiv.textContent = texto;
+    msgDiv.style.display = 'block';
+    clearTimeout(msgDiv._timeout);
+    msgDiv._timeout = setTimeout(() => { msgDiv.style.display = 'none'; }, ms);
+  }
+
+  function actualizarBadgeGlobal() {
+    const total = carrito.reduce((acc, p) => acc + (p.cantidad||0), 0);
+    const els = document.querySelectorAll('.cart-count, #cartCount');
+    els.forEach(e => e.textContent = total);
+  }
+
+  function renderCarrito() {
+    carritoBody.innerHTML = '';
+    if (carrito.length === 0) {
+      carritoBody.innerHTML = `<tr><td colspan="5">Tu carrito está vacío </td></tr>`;
+      totalCarrito.textContent = 'Total: $0.00';
+      guardarCarrito();
+      return;
+    }
+
+    let total = 0;
+    carrito.forEach((item, i) => {
+      const subtotal = (item.precio || 0) * (item.cantidad || 1);
+      total += subtotal;
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${escapeHtml(item.nombre)}</td>
+        <td>$${Number(item.precio).toFixed(2)}</td>
+        <td>
+          <button class="cantidad-btn" data-action="decrease" data-index="${i}">-</button>
+          <span class="cantidad-txt">${item.cantidad}</span>
+          <button class="cantidad-btn" data-action="increase" data-index="${i}">+</button>
+        </td>
+        <td>$${subtotal.toFixed(2)}</td>
+        <td><button class="eliminar-btn" data-action="remove" data-index="${i}">Eliminar</button></td>
+      `;
+      carritoBody.appendChild(tr);
+    });
+
+    totalCarrito.textContent = `Total: $${total.toFixed(2)}`;
+    guardarCarrito();
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  carritoBody.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const action = btn.dataset.action;
+    const index = Number(btn.dataset.index);
+    if (isNaN(index)) return;
+
+    if (action === 'increase') {
+      carrito[index].cantidad = (carrito[index].cantidad || 0) + 1;
+      renderCarrito();
+    } else if (action === 'decrease') {
+      carrito[index].cantidad = (carrito[index].cantidad || 0) - 1;
+      if (carrito[index].cantidad <= 0) carrito.splice(index, 1);
+      renderCarrito();
+    } else if (action === 'remove') {
+      carrito.splice(index, 1);
+      renderCarrito();
+    }
+  });
+
+  // ⚡ Confirmación personalizada
+  function mostrarConfirmacion(mensaje, onConfirm) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal-bg');
+    modal.innerHTML = `
+      <div class="modal">
+        <h3>${mensaje}</h3>
+        <div class="modal-buttons">
+          <button id="btnConfirmar">Aceptar</button>
+          <button id="btnCancelar" class="cancel">Cancelar</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    modal.style.display = 'flex';
+
+    modal.querySelector('#btnConfirmar').onclick = () => {
+      onConfirm();
+      modal.remove();
+    };
+    modal.querySelector('#btnCancelar').onclick = () => modal.remove();
+  }
+
+  vaciarBtn.addEventListener('click', () => {
+    if (carrito.length === 0) {
+      mostrarMensaje('El carrito ya está vacío.');
+      return;
+    }
+
+    mostrarConfirmacion('¿Vaciar todo el carrito?', () => {
+      carrito = [];
+      renderCarrito();
+      mostrarMensaje('Carrito vaciado.');
+    });
+  });
+
+comprarBtn.addEventListener('click', () => {
+  if (carrito.length === 0) {
+    mostrarMensaje('Tu carrito está vacío. Agrega algo antes de continuar.');
+    return;
+  }
+
+  // Enviar datos al servidor
+  fetch('guardar_carrito.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ productos: carrito })
+  })
+  .then(response => response.text())
+  .then(data => {
+    mostrarMensaje(data.includes('✅') ? 'Pedido realizado con éxito ✅' : 'Error al guardar el pedido');
+    carrito = [];
+    guardarCarrito();
+
+    setTimeout(() => {
+      window.location.href = 'Menu_Principal.html';
+    }, 1200);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    mostrarMensaje('Error de conexión con el servidor');
+  });
+});
+  actualizarBadgeGlobal();
+  renderCarrito();
+</script>
+
+<!-- 🎨 Estilos del modal -->
+<style>
+  .modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+  .modal {
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 25px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(150, 120, 255, 0.4);
+    animation: fadeIn 0.25s ease;
+  }
+  .modal h3 {
+    color: #e6e6e6;
+    margin-bottom: 20px;
+  }
+  .modal-buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+  .modal button {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    background-color: #b38bfc;
+    color: white;
+    transition: 0.3s;
+  }
+  .modal button:hover {
+    background-color: #9a6efc;
+  }
+  .modal .cancel {
+    background-color: #333;
+  }
+  .modal .cancel:hover {
+    background-color: #555;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+
+</script>
+</body>
+</html>

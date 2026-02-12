@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Administrador - Cafetería LenSaYa</title>
+  <link rel="icon" type="image/png" href="logo_cafeteria.jpeg">
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: url('fondo.png') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .contenedor {
+      background: rgba(255,255,255,0.9);
+      border-radius: 15px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      color: #3e2723;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background: #6b3e26;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #8d5a44;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h2>Bienvenido al Panel del Administrador ☕</h2>
+    <p>Aquí puedes gestionar pedidos, empleados y más.</p>
+    <a href="logoutadmin.php" class="btn">Continuar</a>
+  </div>
+</body>
+</html>

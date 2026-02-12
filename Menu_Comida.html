@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú de Comida</title>
+  <link rel="stylesheet" href="Menu_Postres.css">
+  <link rel="icon" type="image/png" href="logo_cafeteria.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <header id="header">
+    <nav class="navbar">
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
+      <div class="menu">
+        <a href="Menu_Principal.html">Volver</a>
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">Whatsapp</a>
+        <a href="#">Correo</a>
+        <a href="#">Ubicación</a>
+        <a href="#">Contáctanos</a>
+
+        <a href="carrito.html" class="carrito-link">
+          <i class="fa fa-shopping-cart"></i>
+          <span id="cartCount" class="cart-count">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="bienvenida" id="inicio">
+      <h1>Bienvenido al<br><span>Menú de Comida</span></h1>
+    </div>
+  </header>
+
+  <section id="cafes">
+    <h2>Menú de Comida</h2>
+
+    <div class="menu-items">
+
+      <div class="item">
+        <img src="chilaquiles.png" alt="Chilaquiles">
+        <div class="info">
+          <h3>Chilaquiles Verdes</h3>
+          <p>Deliciosos chilaquiles con salsa verde y crema.</p>
+          <p class="precio">$80.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Chilaquiles Verdes" data-precio="80">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="pechugapollo.png" alt="Pechuga de Pollo">
+        <div class="info">
+          <h3>Pechuga de Pollo a la Plancha</h3>
+          <p>Deliciosa pechuga de pollo a la plancha con especias.</p>
+          <p class="precio">$90.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Pechuga de Pollo a la Plancha" data-precio="90">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="papahorno.png" alt="Papa al Horno">
+        <div class="info">
+          <h3>Papa al Horno con Queso</h3>
+          <p>Deliciosa papa al horno gratinada con queso.</p>
+          <p class="precio">$40.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Papa al Horno con Queso" data-precio="40">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="filetederes.png" alt="Filete de Res">
+        <div class="info">
+          <h3>Filete de Res a la Parrilla</h3>
+          <p>Delicioso filete de res a la parrilla con guarnición.</p>
+          <p class="precio">$120.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Filete de Res a la Parrilla" data-precio="120">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="croasanes.png" alt="Croasanes">
+        <div class="info">
+          <h3>Croasanes de Mantequilla</h3>
+          <p>Deliciosos croasanes recién horneados con mantequilla.</p>
+          <p class="precio">$28.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Croasanes de Mantequilla" data-precio="28">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="sopaespecias.png" alt="Sopa de Especias">
+        <div class="info">
+          <h3>Sopa de Especias</h3>
+          <p>Deliciosa sopa caliente con una mezcla de especias.</p>
+          <p class="precio">$35.00 MXN</p>
+          <button class="btn-agregar" data-nombre="Sopa de Especias" data-precio="35">
+            <i class="fas fa-cart-plus"></i> Agregar al carrito
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Notificación de producto agregado -->
+  <div id="notificacion" class="notificacion">
+    <i class="fas fa-check-circle"></i>
+    <span id="notificacion-texto"></span>
+  </div>
+
+  <!-- SCRIPT GLOBAL DE CARRITO -->
+  <script>
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    function actualizarContador() {
+      const contador = document.getElementById('cartCount');
+      if (contador) {
+        const total = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+        contador.textContent = total;
+      }
+    }
+
+    function guardarCarrito() {
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      actualizarContador();
+    }
+
+    function mostrarNotificacion(mensaje) {
+      const notificacion = document.getElementById('notificacion');
+      const notificacionTexto = document.getElementById('notificacion-texto');
+      
+      if (notificacion && notificacionTexto) {
+        notificacionTexto.textContent = mensaje;
+        notificacion.classList.add('mostrar');
+        
+        setTimeout(() => {
+          notificacion.classList.remove('mostrar');
+        }, 3000);
+      }
+    }
+
+    document.querySelectorAll('.btn-agregar').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const nombre = btn.getAttribute('data-nombre');
+        const precio = parseFloat(btn.getAttribute('data-precio'));
+        const existente = carrito.find(p => p.nombre === nombre);
+        
+        if (existente) {
+          existente.cantidad++;
+        } else {
+          carrito.push({ nombre, precio, cantidad: 1 });
+        }
+        
+        guardarCarrito();
+        
+        // Efecto visual en el botón
+        const originalBg = btn.style.background;
+        btn.style.background = 'linear-gradient(180deg, #4CAF50 0%, #2E7D32 100%)';
+        setTimeout(() => {
+          btn.style.background = originalBg;
+        }, 300);
+        
+        // Mostrar notificación elegante
+        mostrarNotificacion(`✅ ${nombre} agregado al carrito`);
+      });
+    });
+
+    actualizarContador();
+  </script>
+</body>
+</html>

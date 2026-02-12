@@ -1,0 +1,44 @@
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  font-family:Arial;
+  background:url(fondo.png);
+}
+
+.card{
+  background:url(fondo2.png);
+  padding:25px;
+  border-radius:10px;
+  width:300px;
+  text-align:center;
+  box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+
+.input-box{
+  margin:10px 0;
+}
+
+input{
+  width: 80%;
+  padding:8px;
+  border:1px solid gray;
+  border-radius:5px;
+}
+
+.btn{
+  margin-top:10px;
+  width:80%;
+  padding:8px;
+  border:none;
+  background:#0563bb;
+  color:white;
+  cursor:pointer;
+  border-radius:5px;
+}
+
+.msg{
+  margin-top:10px;
+  font-weight:bold;
+}

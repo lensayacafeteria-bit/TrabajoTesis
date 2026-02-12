@@ -1,0 +1,299 @@
+/* === GENERAL === */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url(fondo2.png);
+  color: #333;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* === HEADER === */
+.hero {
+  background: url("fondomenu.png") no-repeat center center/cover;
+  color: white;
+  padding: 40px 20px;
+}
+
+.hero h1 {
+  font-size: 2em;
+  margin: 0;
+  font-family: "Georgia", serif;
+}
+
+.hero h2 {
+  font-size: 1.4em;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.hero .cafe {
+  font-size: 2em;
+  color: orange;
+  font-style: italic;
+}
+
+/* === TÍTULO DEL MENÚ === */
+.titulo-menu {
+  font-size: 55px;
+  margin: 20px 0;
+  color: #111111;
+  font-family: "Georgia", serif;
+}
+
+/* === SECCIÓN DE MENÚS === */
+.menus {
+  background: url(fondo.png);
+  padding: 30px 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.card {
+  background: rgb(245, 190, 8);
+  border-radius: 15px;
+  overflow: hidden;
+  text-align: center;
+  color: black;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: 100%;
+  height: 153px;
+  object-fit: cover;
+}
+
+.card p {
+  margin: 10px 0;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+/* === BOTÓN DEL MENÚ PLEGABLE === */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 2001;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background-color: #34495e;
+}
+
+/* === MENÚ LATERAL (PLEGABLE) === */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: -300px; /* Oculto por defecto */
+  width: 300px;
+  height: 100vh;
+  background: url(fondo2.png);
+  padding: 80px 20px 20px;
+  z-index: 2000;
+  transition: left 0.4s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  border-right: 2px solid rgba(255,255,255,0.1);
+}
+
+/* Cuando el menú está activo */
+.navbar.active {
+  left: 0;
+}
+
+/* Enlaces dentro del menú */
+.navbar a {
+  display: block;
+  color: #f5f3f3;
+  text-decoration: none;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.navbar a:hover {
+  background: url(footer.png);
+  transform: translateX(5px);
+  color: #faf9f9;
+}
+
+.navbar a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.navbar a:hover::before {
+  left: 100%;
+}
+
+/* === FONDO OSCURO CUANDO SE ABRE EL MENÚ === */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1500;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* === ÍCONO Y CONTADOR DEL CARRITO === */
+.carrito-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-top: 15px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.carrito-link:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.carrito-link i {
+  margin-right: 10px;
+  font-size: 1.3em;
+  color: #ffe066;
+}
+
+.cart-count {
+  background: #ff4747;
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 4px 8px;
+  margin-left: auto;
+  box-shadow: 0 0 10px #ff4747;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+  .navbar {
+    width: 250px;
+    left: -250px;
+  }
+  .menu-toggle {
+    width: 45px;
+    height: 45px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .menus {
+    grid-template-columns: 1fr;
+    padding: 15px 5px;
+    gap: 12px;
+    max-width: 100%;
+  }
+
+  .card img {
+    height: 120px;
+  }
+
+  .titulo-menu {
+    font-size: 32px;
+    margin: 10px 0;
+  }
+
+  .hero {
+    padding: 25px 8px;
+  }
+
+  .hero h1 {
+    font-size: 1.3em;
+  }
+
+  .hero h2 {
+    font-size: 1em;
+  }
+
+  .hero .cafe {
+    font-size: 1.3em;
+  }
+
+  .navbar {
+    width: 180px;
+    left: -180px;
+    padding: 60px 10px 10px;
+  }
+
+  .menu-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    top: 10px;
+    left: 10px;
+  }
+
+  .navbar a {
+    font-size: 15px;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .titulo-menu {
+    font-size: 22px;
+  }
+
+  .hero h1,
+  .hero h2,
+  .hero .cafe {
+    font-size: 1em;
+  }
+
+  .card img {
+    height: 80px;
+  }
+}

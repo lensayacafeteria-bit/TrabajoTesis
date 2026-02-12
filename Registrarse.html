@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro - Cafetería LenSaYa</title>
+  <link rel="icon" type="image/png" href="logo_cafeteria.jpeg">
+  <link rel="stylesheet" href="Registrarse.css">
+</head>
+<body>
+  <div class="contenedor">
+    <h2>Registrarse</h2>
+    <form id="registroForm" method="POST" action="registrar.php">
+      <div class="input-box">
+        <label>Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+      <div class="input-box">
+        <label>Apellido Paterno:</label>
+        <input type="text" id="apellido_paterno" name="apellido_paterno" required>
+      </div>
+      <div class="input-box">
+        <label>Apellido Materno:</label>
+        <input type="text" id="apellido_materno" name="apellido_materno" required>
+      </div>
+      <div class="input-box">
+        <label>Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" required>
+      </div>
+      <div class="input-box">
+        <label>Correo:</label>
+        <input type="email" id="correo" name="correo" required>
+      </div>
+      <div class="input-box">
+        <label>Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" minlength="8" required>
+        <span class="toggle-password" id="togglePassword"></span>
+      </div>
+      <div class="input-box">
+        <label>Confirmar Contraseña:</label>
+        <input type="password" id="validar_contrasena" name="confirmar" minlength="8" required>
+        <span class="toggle-password" id="toggleConfirmPassword"></span>
+      </div>
+
+      <a href="#" id="avisoPrivacidadBtn">Aviso de Privacidad</a>
+      <div id="modalAviso" class="modal" style="display:none;">
+        <div class="modal-content" style="background:#fff; padding:20px; border-radius:8px; max-width:400px; margin:auto; position:relative;">
+          <h3>Aviso de Privacidad</h3>
+          <p>La Cafetería LenSaYa es responsable del tratamiento de los datos personales que usted nos proporcione.
+            <br><br>
+            En Cafetería LenSaYa nos comprometemos a proteger su privacidad y sus datos personales. Este aviso explica de manera clara y transparente cómo recabamos, utilizamos, protegemos y divulgamos su información.
+          </p>
+          <button id="aceptoBtn" style="margin-top:15px;">Acepto términos y condiciones</button>
+          <span id="cerrarModal" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;">&times;</span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn">Registrarse</button>
+      <br><br>
+      <a href="index.html">¿Ya tienes cuenta? Inicia sesión</a>
+    </form>
+
+    <div class="logo">
+      <img src="logo_cafeteria.png" alt="Logo Cafetería">
+    </div>
+  </div>
+
+  <script>
+    // Mostrar / ocultar contraseña
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('contrasena');
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    const confirmPasswordInput = document.getElementById('validar_contrasena');
+
+    togglePassword.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      togglePassword.classList.toggle('active');
+    });
+
+    toggleConfirmPassword.addEventListener('click', () => {
+      const isPassword = confirmPasswordInput.type === 'password';
+      confirmPasswordInput.type = isPassword ? 'text' : 'password';
+      toggleConfirmPassword.classList.toggle('active');
+    });
+
+    // Modal privacidad
+    const avisoBtn = document.getElementById('avisoPrivacidadBtn');
+    const modal = document.getElementById('modalAviso');
+    const cerrar = document.getElementById('cerrarModal');
+    const aceptoBtn = document.getElementById('aceptoBtn');
+
+    avisoBtn.addEventListener('click', e => { e.preventDefault(); modal.style.display = 'block'; });
+    cerrar.addEventListener('click', () => modal.style.display = 'none');
+    aceptoBtn.addEventListener('click', () => modal.style.display = 'none');
+    window.onclick = e => { if (e.target == modal) modal.style.display = 'none'; };
+
+    // Validar contraseñas en front-end
+    document.getElementById("registroForm").addEventListener("submit", function(e) {
+      let pass = passwordInput.value;
+      let confirmar = confirmPasswordInput.value;
+      if (pass !== confirmar) {
+        e.preventDefault();
+        let errorMsg = document.createElement('div');
+        errorMsg.textContent = "Las contraseñas no coinciden";
+        errorMsg.style.background = "#ffdddd";
+        errorMsg.style.color = "#d8000c";
+        errorMsg.style.padding = "10px";
+        errorMsg.style.margin = "10px 0";
+        errorMsg.style.border = "1px solid #d8000c";
+        errorMsg.style.borderRadius = "5px";
+        errorMsg.style.textAlign = "center";
+        errorMsg.id = "passwordErrorMsg";
+
+        let prevMsg = document.getElementById("passwordErrorMsg");
+        if (prevMsg) prevMsg.remove();
+
+        let form = document.getElementById("registroForm");
+        let btn = form.querySelector(".btn");
+        form.insertBefore(errorMsg, btn);
+      }
+    });
+  </script>
+</body>
+</html>

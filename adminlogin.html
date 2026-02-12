@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafetería LenSaYa - Login</title>
+  <link rel="icon" type="image/png" href="logo_cafeteria.jpeg">
+  <link rel="stylesheet" href="Registrarse.css">
+</head>
+<body>
+  <div class="contenedor">
+    <h2>Iniciar Sesión Administrador</h2>
+    <form method="POST" action="adminlogin.php">
+      <div class="input-box">
+        <label>Correo:</label>
+        <input type="email" name="correo" required>
+      </div>
+
+      <div class="input-box">
+        <label>Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" minlength="6" required>
+        <span class="toggle-password" id="togglePassword"></span>
+      </div>
+
+      <button type="submit" class="btn">Iniciar Sesión</button>
+      <br><br>
+      <a href="index.html">Regresar</a>
+    </form>
+
+    <div class="logo">
+      <img src="logo_cafeteria.jpeg" alt="Logo Cafetería">
+    </div>
+  </div>
+
+  <script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('contrasena');
+
+    togglePassword.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      togglePassword.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

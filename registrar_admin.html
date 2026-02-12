@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Administrador | Cafetería LenSaYa</title>
+  <link rel="icon" type="image/png" href="logo_cafeteria.jpeg">
+  <link rel="stylesheet" href="registrar_admin.css">
+</head>
+<body>
+  <div class="contenedor">
+    <h2>Registrar Administrador</h2>
+    <form id="registroForm" method="POST" action="registrar_admin.php">
+      <div class="input-box">
+        <label>Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+
+      <div class="input-box">
+        <label>Correo:</label>
+        <input type="email" id="correo" name="correo" required>
+      </div>
+
+      <div class="input-box">
+        <label>Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" minlength="8" required>
+        <span class="toggle-password" id="togglePassword"></span>
+      </div>
+
+      <div class="input-box">
+        <label>Confirmar Contraseña:</label>
+        <input type="password" id="confirmar" name="confirmar" minlength="8" required>
+        <span class="toggle-password" id="toggleConfirm"></span>
+      </div>
+
+      <button type="submit" class="btn">Registrarse</button>
+      <br><br>
+      <a href="Menu_admin.html">Menu_Principal</a>
+    </form>
+
+    <div class="logo">
+      <img src="logo_cafeteria.jpeg" alt="Logo Cafetería">
+    </div>
+  </div>
+
+  <script>
+    // Mostrar / ocultar contraseña
+    const togglePassword = document.getElementById('togglePassword');
+    const toggleConfirm = document.getElementById('toggleConfirm');
+    const passwordInput = document.getElementById('contrasena');
+    const confirmInput = document.getElementById('confirmar');
+
+    togglePassword.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      togglePassword.classList.toggle('active');
+    });
+
+    toggleConfirm.addEventListener('click', () => {
+      const isPassword = confirmInput.type === 'password';
+      confirmInput.type = isPassword ? 'text' : 'password';
+      toggleConfirm.classList.toggle('active');
+    });
+
+    // Validar contraseñas antes de enviar
+    document.getElementById("registroForm").addEventListener("submit", function(e) {
+      const pass = passwordInput.value;
+      const confirmar = confirmInput.value;
+
+      if (pass !== confirmar) {
+        e.preventDefault();
+        alert("⚠️ Las contraseñas no coinciden");
+      }
+    });
+  </script>
+</body>
+</html>

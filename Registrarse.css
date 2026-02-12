@@ -1,0 +1,316 @@
+body {
+  font-family: 'Georgia', serif;
+  margin: 0;
+  background: url(fondo.png);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.contenedor {
+  background: url(fondo2.png);
+  padding: 30px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  text-align: center;
+  position: relative;
+}
+
+.contenedor h2 {
+  color: #3e2723;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.input-box {
+  margin-bottom: 18px;
+  text-align: left;
+  position: relative;
+}
+
+.input-box label {
+  display: block;
+  font-weight: bold;
+  color: #3e2723;
+  margin-bottom: 5px;
+}
+
+.input-box input {
+  width: 90%;
+  padding: 10px 35px 10px 10px;
+  border: 3px solid #0f0f0f;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.input-box i {
+  position: absolute;
+  right: 10px;
+  top: 38px;
+  color: #6b3e26;
+}
+
+.error {
+  color: #c62828;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: none;
+}
+
+.btn {
+  width: 100%;
+  background: #6b3e26;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #8d5a44;
+}
+
+.logo {
+  margin-top: 20px;
+}
+
+.logo img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.privacidad{
+  color: #0f0f0f;
+  font-size: 30px;
+}
+
+a{
+  color: #111111;
+  text-decoration: none; 
+  font-weight: bold;
+  font-family: 'Segoe UI', cursive, sans-serif; 
+  font-size: 1.1em;
+}    
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.4);
+}
+
+.input-box {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 65%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background-image: url('Mostrar.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.toggle-password.active {
+  background-image: url('Mostrar.gif');
+}
+
+/* Dispositivos muy pequeños (móviles pequeños, 360px y menos) */
+@media (max-width: 360px) {
+  body {
+    padding: 10px;
+    height: auto;
+  }
+  
+  .contenedor {
+    padding: 15px;
+    border-radius: 10px;
+    width: 95%;
+  }
+  
+  .contenedor h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+  
+  .logo img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .btn {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .input-box input {
+    padding: 8px 30px 8px 8px;
+    font-size: 0.85rem;
+  }
+  
+  .privacidad {
+    font-size: 24px;
+  }
+  
+  a {
+    font-size: 1em;
+  }
+}
+
+/* Móviles (361px - 480px) */
+@media (min-width: 361px) and (max-width: 480px) {
+  body {
+    padding: 15px;
+    height: auto;
+  }
+  
+  .contenedor {
+    width: 90%;
+    padding: 20px;
+    border-radius: 12px;
+  }
+  
+  .logo img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .contenedor h2 {
+    font-size: 1.5rem;
+  }
+  
+  .btn {
+    font-size: 0.95rem;
+    padding: 11px;
+  }
+}
+
+/* Tablets pequeñas (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    padding: 25px;
+  }
+  
+  .contenedor {
+    width: 85%;
+    max-width: 450px;
+    padding: 25px;
+  }
+  
+  .logo img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .contenedor h2 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Tablets grandes (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .contenedor {
+    width: 70%;
+    max-width: 500px;
+    padding: 35px;
+  }
+  
+  .logo img {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .contenedor h2 {
+    font-size: 1.7rem;
+  }
+  
+  .btn {
+    padding: 14px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Escritorios grandes (1025px - 1440px) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .contenedor {
+    width: 400px;
+    padding: 35px;
+  }
+  
+  .logo img {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+/* Pantallas muy grandes (más de 1440px) */
+@media (min-width: 1441px) {
+  .contenedor {
+    width: 450px;
+    padding: 40px;
+    transform: scale(1.05);
+  }
+  
+  .logo img {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .contenedor h2 {
+    font-size: 2rem;
+  }
+  
+  .btn {
+    padding: 15px;
+    font-size: 1.1rem;
+  }
+  
+  .input-box input {
+    padding: 12px 40px 12px 12px;
+    font-size: 1rem;
+  }
+}
+
+/* Orientación landscape para móviles */
+@media (max-height: 600px) and (orientation: landscape) {
+  body {
+    height: auto;
+    min-height: 100vh;
+    padding: 10px;
+  }
+  
+  .contenedor {
+    padding: 15px;
+    margin: 10px 0;
+  }
+  
+  .logo {
+    margin-top: 10px;
+  }
+  
+  .logo img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .input-box {
+    margin-bottom: 12px;
+  }
+}

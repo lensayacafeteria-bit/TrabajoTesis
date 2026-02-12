@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nueva Contraseña</title>
+  <link rel="stylesheet" href="estilo_recuperar.css">
+  <style>
+    /* === Estilos principales mejorados === */
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      background: url('fondo.png') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .contenedor {
+      background: rgba(255,255,255,0.95) url('fondo2.png') no-repeat center;
+      background-size: cover;
+      padding: 35px 30px;
+      border-radius: 20px;
+      width: 350px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      text-align: center;
+      position: relative;
+      animation: aparecer 0.8s ease;
+    }
+
+    @keyframes aparecer {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .contenedor h2 {
+      color: #3e2723;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .input-box {
+      margin-bottom: 20px;
+      text-align: left;
+      position: relative;
+    }
+
+    .input-box label {
+      display: block;
+      font-weight: bold;
+      color: #3e2723;
+      margin-bottom: 5px;
+    }
+
+    .input-box input {
+      width: 85%;
+      padding: 10px 35px 10px 10px;
+      border: 2px solid #6b3e26;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      background-color: rgba(255,255,255,0.9);
+      transition: 0.3s;
+    }
+
+    .input-box input:focus {
+      border-color: #8d5a44;
+      box-shadow: 0 0 8px rgba(141,90,68,0.5);
+    }
+
+    /* === Ícono mostrar/ocultar contraseña === */
+    .toggle-password {
+      position: absolute;
+      right: 40px;
+      top: 65%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      width: 25px;
+      height: 25px;
+      background-image: url('Ocultar.gif');
+      background-repeat: no-repeat;
+      background-size: contain;
+      transition: 0.3s ease;
+    }
+
+    .toggle-password.active {
+      background-image: url('Mostrar.gif');
+    }
+
+    .btn {
+      width: 100%;
+      background: linear-gradient(135deg, #6b3e26, #8d5a44);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #8d5a44, #a36c54);
+      transform: scale(1.03);
+    }
+
+    #respuesta {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: #3e2723;
+    }
+
+    .logo {
+      margin-top: 25px;
+    }
+
+    .logo img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #3e2723;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    a {
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
+      font-family: 'Segoe UI', cursive, sans-serif;
+      font-size: 1.1em;
+    }
+
+    /* ==== RESPONSIVE ==== */
+    @media (max-width: 600px) {
+      .contenedor {
+          width: 90vw;
+          padding: 20px;
+          border-radius: 12px;
+      }
+      .logo img {
+          width: 90px;
+          height: 90px;
+      }
+      .contenedor h2 {
+          font-size: 1.3rem;
+      }
+      .btn {
+          font-size: 0.95rem;
+          padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contenedor">
+    <h2>Establecer Nueva Contraseña</h2>
+
+    <form action="actualizar_contraseña.php" method="POST" id="formNueva">
+      <div class="input-box">
+        <label for="nueva">Nueva contraseña</label>
+        <input type="password" id="nueva" name="nueva" placeholder="Ingresa tu nueva contraseña" required>
+        <span class="toggle-password" id="togglePass"></span>
+      </div>
+
+      <input type="hidden" id="token" name="token">
+
+      <button type="submit" class="btn">Guardar Contraseña</button>
+      <p id="respuesta"></p>
+    </form>
+
+    <div class="logo">
+      <img src="logo_cafeteria.jpeg" alt="Logo">
+    </div>
+  </div>
+
+  <script>
+  // ✅ Obtener el token desde la URL
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('token') || '';
+  document.getElementById('token').value = token;
+
+  // ✅ Mostrar / Ocultar contraseña
+  const togglePassword = document.getElementById('togglePass');
+  const passwordInput = document.getElementById('nueva');
+
+  togglePassword.addEventListener('click', () => {
+    const tipo = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', tipo);
+    togglePassword.classList.toggle('active');
+  });
+
+  // ✅ Interceptar el envío para mostrar feedback y redirigir
+  document.getElementById('formNueva').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const datos = new FormData(form);
+    const respuesta = document.getElementById('respuesta');
+    respuesta.textContent = "Guardando contraseña...";
+
+    try {
+      const res = await fetch('actualizar_contraseña.php', {
+        method: 'POST',
+        body: datos
+      });
+      const data = await res.json();
+
+      // ✅ Mostrar mensaje y redirigir al login
+      respuesta.textContent = data.mensaje || "Contraseña actualizada correctamente.";
+
+      // 🔹 Redirigir al login después de 1.5 segundos
+      setTimeout(() => {
+        window.location.href = "index.html"; 
+      }, 1500);
+
+    } catch (error) {
+      console.error(error);
+      respuesta.textContent = "Error al conectar con el servidor.";
+    }
+  });
+  </script>
+
+</body>
+</html>

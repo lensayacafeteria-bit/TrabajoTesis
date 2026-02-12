@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafetería LenSaYa</title>
+  <link rel="stylesheet" href="menu_admin.css">
+  <link rel="icon" type="image/png" href="logo_cafeteria.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <header class="hero">
+    <h1>Bienvenido a Cafetería LenSaYa - Área Administrativa</h1>
+    <h2>Es un excelente día para tomar un <span class="cafe">Café</span></h2>
+  </header>
+
+  <button class="menu-toggle" id="menuToggle">☰</button>
+
+  <nav class="navbar" id="navbar">
+    <div class="menu-header">
+      <h3>Menú</h3>
+    </div>
+
+    <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+    <a href="#"><i class="fab fa-whatsapp"></i> Whatsapp</a>
+    <a href="index.html"><i class="fa fa-sign-out-alt"></i> Cerrar Sesión</a>
+    <a href="#"><i class="fa fa-envelope"></i> Correo</a>
+    <a href="#"><i class="fa fa-map-marker-alt"></i> Ubicación</a>
+    <a href="#"><i class="fa fa-phone"></i> Contáctanos</a>
+
+    <hr class="menu-divider">
+
+    <a href="carrito.html" class="carrito-link">
+      <i class="fa fa-shopping-cart"></i> Carrito
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main>
+    <h2 class="titulo-menu">Panel Administrativo</h2>
+    <section class="menus">
+      <div class="card">
+        <a href="Menu_Postres.html"><img src="menú_postres.png" alt="Menú de Postres"></a>
+        <p>Menú de Postres</p>
+      </div>
+      <div class="card">
+        <a href="Menu_Comida.html"><img src="menú_comida.png" alt="Menú de Comida"></a>
+        <p>Menú de Comida</p>
+      </div>
+      <div class="card">
+        <a href="Menu_Snacks.html"><img src="menú_Snacks.png" alt="Menú de Snacks"></a>
+        <p>Menú de Snacks</p>
+      </div>
+      <div class="card">
+        <a href="Menu_Bebidas.html"><img src="menú_bebidas.png" alt="Menú de Bebidas"></a>
+        <p>Menú de Bebidas</p>
+      </div>
+      <div class="card">
+        <a href="Reservaciones.html"><img src="reservaciones_1.png" alt="Reservaciones"></a>
+        <p>Reservaciones</p>
+      </div>
+      <div class="card">
+        <a href="Pedidos.html"><img src="pedidos.png" alt="Pedidos"></a>
+        <p>Pedidos</p>
+      </div>
+      <div class="card">
+        <a href="carrito.html"><img src="carrito.png" alt="Carrito de Compras"></a>
+        <p>Carrito de Compras</p>
+      </div>
+      <div class="card">
+        <a href="ver_pedidos.html"><img src="ordenes.png" alt="Pedidos"></a>
+        <p>Visualizar Órdenes</p>
+      </div>
+      <div class="card">
+        <a href="gestionar_usuarios.php"><img src="gestionar_usuarios.jpg" alt="Gestionar Usuarios"></a>
+        <p>Gestionar Usuarios</p>
+      </div>
+      <div class="card">
+        <a href="gestionar_admin.php"><img src="gestionar_admin.jpg" alt="Gestionar Administradores"></a>
+        <p>Gestionar Administradores</p>
+      </div>
+      <div class="card">
+        <a href="registrar_admin.html"><img src="registrar_admins.png" alt="Registrar Administrador"></a>
+        <p>Registrar Administrador</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navbar = document.querySelector('.navbar');
+    const overlay = document.querySelector('.overlay');
+
+    menuToggle.addEventListener('click', () => {
+      navbar.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', () => {
+      navbar.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+  </script>
+
+  <script src="carrito_compartido.js"></script>
+</body>
+</html>
