@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Pedidos | Cafetería</title>
+  <link rel="icon" type="image/png" href="logo_cafeteria.jpeg" />
+  <link rel="stylesheet" href="estilo_pedidos.css">
+
+  <style>
+    /* === Modal estilo oscuro elegante === */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .modal-content {
+      background-color: #1e1e1e;
+      color: #141414;
+      border-radius: 10px;
+      padding: 25px 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      width: 90%;
+      max-width: 380px;
+      text-align: center;
+      animation: aparecer 0.25s ease;
+    }
+
+    .modal-content p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .modal-buttons button {
+      padding: 8px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.2s;
+      font-size: 0.95rem;
+    }
+
+    #confirmBtn {
+      background-color: #646cff;
+      color: rgb(17, 17, 17);
+    }
+
+    #confirmBtn:hover {
+      background-color: #737bff;
+    }
+
+    #cancelBtn {
+      background-color: transparent;
+      color: #bbb;
+      border: 1px solid #555;
+    }
+
+    #cancelBtn:hover {
+      background-color: #2a2a2a;
+      color: rgb(14, 13, 13);
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* === Modal de alerta simple === */
+    .modal-alert .modal-buttons {
+      justify-content: center;
+    }
+
+    .modal-alert #okBtn {
+      background-color: #646cff;
+      color: white;
+      padding: 8px 25px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .modal-alert #okBtn:hover {
+      background-color: #737bff;
+    }
+  </style>
+</head>
+
+<body>
+  <header>☕ Panel de Pedidos - Cafetería LenSaYa</header>
+
+  <div class="container" id="contenedorPedidos"></div>
+
+  <!-- Modal de confirmación -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <p id="modal-text">¿Confirmar acción?</p>
+      <div class="modal-buttons">
+        <button id="confirmBtn">Aceptar</button>
+        <button id="cancelBtn">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de alerta -->
+  <div id="alertModal" class="modal modal-alert">
+    <div class="modal-content">
+      <p id="alert-text">Mensaje</p>
+      <div class="modal-buttons">
+        <button id="okBtn">Aceptar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const contenedor = document.getElementById('contenedorPedidos');
+  const colores = ['#d1f7c4', '#c4e3f7', '#f7d1c4', '#f7f3c4', '#e0c4f7'];
+
+  // === MODALES ===
+  const confirmModal = document.getElementById('confirmModal');
+  const confirmText = document.getElementById('modal-text');
+  const confirmBtn = document.getElementById('confirmBtn');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const alertModal = document.getElementById('alertModal');
+  const alertText = document.getElementById('alert-text');
+  const okBtn = document.getElementById('okBtn');
+
+  function mostrarAlerta(mensaje, callback = null) {
+    alertText.textContent = mensaje;
+    alertModal.style.display = 'flex';
+    okBtn.onclick = () => {
+      alertModal.style.display = 'none';
+      if (callback) callback();
+    };
+  }
+
+  function mostrarConfirmacion(mensaje, onConfirm) {
+    confirmText.textContent = mensaje;
+    confirmModal.style.display = 'flex';
+
+    confirmBtn.onclick = () => {
+      confirmModal.style.display = 'none';
+      onConfirm();
+    };
+    cancelBtn.onclick = () => {
+      confirmModal.style.display = 'none';
+    };
+  }
+
+  // === FUNCIONES DE PEDIDOS ===
+  function cargarPedidos() {
+    fetch('obtener_pedidos.php')
+      .then(res => res.json())
+      .then(pedidos => {
+        contenedor.innerHTML = '';
+
+        const ordenes = Object.keys(pedidos);
+        if (ordenes.length === 0) {
+          contenedor.innerHTML = '<p style="text-align:center;">No hay pedidos pendientes</p>';
+          return;
+        }
+
+        ordenes.forEach((ordenId, index) => {
+          const color = colores[index % colores.length];
+          const items = pedidos[ordenId];
+
+          const div = document.createElement('div');
+          div.className = 'orden';
+          div.style.backgroundColor = color;
+
+          let html = `
+            <h2 style="text-align:center; margin:10px;">Orden #${ordenId}</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Fecha</th>
+                  <th>Producto</th>
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+          `;
+
+          items.forEach(p => {
+            html += `
+              <tr>
+                <td>${p.id}</td>
+                <td>${p.fecha}</td>
+                <td>${p.producto}</td>
+                <td>$${parseFloat(p.precio).toFixed(2)}</td>
+                <td>${p.cantidad}</td>
+                <td>$${parseFloat(p.subtotal).toFixed(2)}</td>
+              </tr>
+            `;
+          });
+
+          html += `
+              </tbody>
+            </table>
+            <div style="text-align:center; padding:10px;">
+              <button class="btn" onclick="confirmarOrden(${ordenId})">✅ Confirmar Orden</button>
+            </div>
+          `;
+
+          div.innerHTML = html;
+          contenedor.appendChild(div);
+        });
+      });
+  }
+
+  function confirmarOrden(ordenId) {
+    mostrarConfirmacion(`¿Confirmar y eliminar toda la orden #${ordenId}?`, () => {
+      fetch('eliminar_pedido.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'orden_id=' + ordenId
+      })
+      .then(res => res.text())
+      .then(resp => {
+        if (resp.trim() === 'ok') {
+          mostrarAlerta('✅ Orden confirmada y eliminada.', cargarPedidos);
+        } else {
+          mostrarAlerta('❌ Error al eliminar la orden.');
+        }
+      });
+    });
+  }
+
+  // Cargar pedidos cada 5 segundos
+  setInterval(cargarPedidos, 5000);
+  cargarPedidos();
+  </script>
+</body>
+</html>
