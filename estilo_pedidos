@@ -1,0 +1,145 @@
+/* === ESTILO PANEL DE PEDIDOS - CAFETERÍA EL BUEN SABOR === */
+
+/* === GENERAL === */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: url('fondo.png') no-repeat center center fixed;
+  background-size: cover;
+  color: rgb(250, 245, 245);
+  line-height: 1.6;
+}
+
+/* === HEADER === */
+header {
+  background: url("fondobebidas.png") no-repeat center center/cover;
+  color: #fcf9f9ff;
+  text-align: center;
+  font-family: "Georgia", serif;
+  font-size: 1.8em;
+  padding: 50px 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 8px rgba(255, 204, 102, 0.6);
+  border-bottom: 2px solid rgba(255, 204, 102, 0.3);
+}
+
+/* === CONTENEDOR PRINCIPAL === */
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 50px auto;
+  background: rgba(247, 233, 233, 0.973);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  padding: 20px;
+  border: 1px solid rgba(255, 204, 102, 0.3);
+}
+
+/* === TABLA DE PEDIDOS === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  text-align: center;
+  color: rgb(10, 10, 10);
+}
+
+th {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffcc66;
+  font-size: 18px;
+  padding: 12px;
+  border-bottom: 2px solid rgba(255, 204, 102, 0.3);
+  text-transform: uppercase;
+}
+
+td {
+  padding: 10px;
+  font-size: 16px;
+  border-bottom: 1px solid #444;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: background 0.3s;
+}
+
+tr:hover td {
+  background: rgba(255, 204, 102, 0.2);
+}
+
+/* === BOTÓN CONFIRMAR === */
+.btn {
+  background: linear-gradient(180deg, #ffcc66 0%, #b8860b 100%);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: "Georgia", serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+.btn:hover {
+  background: linear-gradient(180deg, #ffe18d 0%, #c49a00 100%);
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(255, 204, 102, 0.4);
+}
+
+/* === MENSAJE SIN PEDIDOS === */
+#tablaPedidos td[colspan="7"] {
+  background: rgba(250, 249, 248, 0.945);
+  color: #ffcc66;
+  font-style: italic;
+  font-size: 1.1em;
+  padding: 20px;
+}
+
+/* === SCROLLBAR PERSONALIZADO === */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffcc66, #b8860b);
+  border-radius: 5px;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 800px) {
+  header {
+    font-size: 1.4em;
+    padding: 30px 10px;
+  }
+
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  th, td {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .btn {
+    padding: 6px 10px;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 500px) {
+  table {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 6px;
+  }
+
+  header {
+    font-size: 1.1em;
+  }
+}
