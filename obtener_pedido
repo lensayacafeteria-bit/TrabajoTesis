@@ -1,0 +1,18 @@
+<?php
+header('Content-Type: application/json');
+
+$conexion = new mysqli("localhost", "root", "", "cafeteria_lensata");
+if ($conexion->connect_error) {
+    die(json_encode(["error" => "Error de conexión: " . $conexion->connect_error]));
+}
+
+$result = $conexion->query("SELECT * FROM carrito ORDER BY orden_id, id");
+
+$pedidos = [];
+while ($row = $result->fetch_assoc()) {
+    $pedidos[$row['orden_id']][] = $row;
+}
+
+echo json_encode($pedidos);
+$conexion->close();
+?>
